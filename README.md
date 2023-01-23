@@ -31,20 +31,20 @@
 
 | **URL**          | **HTTP Verb**|**Action**|
 |------------------|--------------|----------|
-| /food/         | GET          | index  
-| /food/:id      | GET          | show       
-| /food/new      | GET          | new   
-| /food          | POST         | create   
-| /food/:id/edit | GET          | edit       
-| /food/:id      | PATCH/PUT    | update    
-| /food/:id      | DELETE       | destroy  
+| /notes/         | GET          | index  
+| /notes/:id      | GET          | show       
+| /notes/new      | GET          | new   
+| /notes          | POST         | create   
+| /notes/:id/edit | GET          | edit       
+| /notes/:id      | PATCH/PUT    | update    
+| /notes/:id      | DELETE       | destroy  
 
 #### Adding notes
 
 | **URL**          | **HTTP Verb**|**Action**|
 |--------------------|--------------|----------|
-| /comments/:foodId | POST         | create  
-| /comments/delete/:foodId/:commentId      | DELETE          | destroy       
+| /comments/:notesId | POST         | create  
+| /comments/delete/:notesId/:commentId      | DELETE          | destroy       
 
 
 #### Users

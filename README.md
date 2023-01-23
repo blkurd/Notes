@@ -16,15 +16,15 @@
 # Layout
 
 1. Home Page
-![diagram1](images.first page.png)
+![diagram1](images.firstpage.png)
 
 2. Signup/Login Page
 
-![diagram2](images/second page.png)
+![diagram2](images/secondpage.png)
 
 3. Notes Page
 
-![diagram3](images/third page.png)
+![diagram3](images/thirdpage.png)
 
 #### NOTES
 

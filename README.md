@@ -40,6 +40,11 @@ As a user I want the ability to:
 
 ![](Images/thirdpage.png)
 
+4. ERD
+
+![](Images/ERD.png)
+
+
 #### NOTES
 
 | **URL**          | **HTTP Verb**|**Action**|

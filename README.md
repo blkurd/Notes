@@ -17,18 +17,15 @@
 
 1. Home Page
 
-![](images/firstpage.png)
-
-
-![](images/firstpage.png)
+![](Images/firstpage.png)
 
 2. Signup/Login Page
 
-![](images/secondpage.png)
+![](Images/secondpage.png)
 
 3. Notes Page
 
-![](images/thirdpage.png)
+![](Images/thirdpage.png)
 
 #### NOTES
 

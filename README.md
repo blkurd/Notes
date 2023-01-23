@@ -13,6 +13,19 @@
 5. Mongoose/MongoDB
 6. Express
 
+
+## User Stories
+```
+As a user I want the ability to:
+-sign up
+-log in
+-log out
+-Create notes
+-Be able to write and edit these notes
+-Delete the notes I need to be deleted.
+-Make some notes public for other to comment on.
+-Be able to comment on other's notes.
+
 # Layout
 
 1. Home Page

@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^2.0.20"
+  },
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "name": "project-2-notes",
+  "description": "# User Story",
+  "version": "1.0.0",
+  "main": "server.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blkurd/Project-2-Notes.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/blkurd/Project-2-Notes/issues"
+  },
+  "homepage": "https://github.com/blkurd/Project-2-Notes#readme"
+}

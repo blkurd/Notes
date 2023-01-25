@@ -90,17 +90,17 @@ app.get("/notes/seed", (req, res) => {
   });
 });
 
-// // index route -> displays all notes
-// app.get("/notes", (req, res) => {
-//   // find all the notes
-//   Note.find({})
-//     // send json if successful
-//     .then((notes) => {
-//       res.json({ notes: notes });
-//     })
-//     // catch errors if they occur
-//     .catch((err) => console.log("The following error occurred: \n", err));
-// });
+// index route -> displays all notes
+app.get("/notes", (req, res) => {
+  // find all the notes
+  Note.find({})
+    // send json if successful
+    .then((notes) => {
+      res.json({ notes: notes });
+    })
+    // catch errors if they occur
+    .catch((err) => console.log("The following error occurred: \n", err));
+});
 
 /////////////////////////////////////
 //// Server Listener             ////

@@ -9,9 +9,9 @@ const { Schema, model } = mongoose
 
 // notes Schema
 const notesSchema = new Schema ({
-        title: string,
-        text : string,
-        color : string
+        title: String,
+        text : String,
+        color : String
 })
 
 // make the notes model

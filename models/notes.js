@@ -9,6 +9,7 @@ const { Schema, model } = mongoose
 
 // notes Schema
 const notesSchema = new Schema ({
+        owner: String,
         title: String,
         text : String,
         color : String

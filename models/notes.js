@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////
-//// Our schema and model for the fruit resource          ////
+//// Our schema and model for the note resource          ////
 //////////////////////////////////////////////////////////////
 // This is the old mongoose import and we want the mongoose object to relate to our db 
 // so we are going to bring in the mongoose connection from our utils

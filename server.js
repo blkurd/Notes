@@ -11,6 +11,7 @@ const morgan = require("morgan"); // import the morgan request logger
 require("dotenv").config(); // Load my ENV file's variables
 const path = require("path"); // import path module
 const NoteRouter = require("./controllers/noteControllers");
+const UserRouter = require("./controllers/userControllers");
 const middleware = require('./utils/middleware')
 /////////////////////////////////////
 //// Import out models         ////
@@ -74,6 +75,8 @@ app.get("/", (req, res) => {
 // the first arg is the base URL, second arg is the file to use.
 
 app.use("/notes", NoteRouter);
+app.use("/users", UserRouter);
+
 
 // All moved to noteControllers
 // // we're going to build a seed route

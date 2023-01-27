@@ -3,7 +3,10 @@
 /////////////////////////////////////
 const express = require("express"); // import the express framework
 const morgan = require("morgan"); // import the morgan request logger
-/////////////////////////////////////
+const session = require ('express-session') // import the express-session package
+const MongoStore = require ('connect-mongo') // import the connect-mongo package(for sessions)
+require('dotenv').config()
+///////////////////////////////////
 //// Middleware Function         ////
 /////////////////////////////////////
 // Now, instead of processing our middleware in server.js, we're going to

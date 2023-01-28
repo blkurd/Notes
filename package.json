@@ -9,7 +9,9 @@
     "morgan": "^1.10.0"
   },
   "scripts": {
-    "start": "nodemon server.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js",
+    "seed": "node models/seed.js"
   },
   "name": "project-2-notes",
   "description": "# User Story",

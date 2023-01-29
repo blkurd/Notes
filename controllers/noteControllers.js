@@ -61,7 +61,7 @@ router.post("/", (req, res) => {
 
 // GET route
 // Index -> This is a user specific index route
-// this will only show the logged in user's notes
+// this will only show the logged in user's notes  
 
 router.get('/mine', (req, res) => {
   // find notes by ownership, using the req.session info

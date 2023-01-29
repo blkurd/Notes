@@ -6,7 +6,8 @@
 // const mongoose = require('mongoose') // import mongoose
 const mongoose = require("../utils/connection"); //import mongoose from utils
 // const { stringify } = require('querystring')
-
+// import our commentSchema, to use as a subdocument
+const commentSchema = require('./comment')
 // we'll destructure the Schema and model functions from mongoose
 const { Schema, model } = mongoose;
 
@@ -20,7 +21,9 @@ const notesSchema = new Schema(
       // this line tells us which model to look at
       ref: "User",
     },
-
+    
+    comments: [commentSchema],
+    
     title: {
       type: String,
     },

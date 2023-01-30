@@ -2,5 +2,6 @@ body{
 
     background-color: lightgrey;
     background-image: url("https://cutewallpaper.org/cdn-cgi/mirage/879d3f56044898301ccabab4a8a90586cd5663eca603a14193df05b49a03034b/1280/22/desk-wallpapers/138444890.jpg");
-    background-size: cover;
+    background-repeat: no-repeat;
+    background-size:2000px;
 } 

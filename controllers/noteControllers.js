@@ -67,7 +67,7 @@ router.get('/mine', (req, res) => {
   // find notes by ownership, using the req.session info
   Note.find({ owner: req.session.userId })
       .populate('owner', 'username')
-      // .populate('comments.author', '-password')
+      .populate('comments.author', '-password')
       .then(notes => {
           // if found, display the notes
           res.status(200).json({ notes: notes })
@@ -188,6 +188,7 @@ router.get("/:id", (req, res) => {
   const id = req.params.id;
   // use a mongoose method to find using that id
   Note.findById(id)
+  .populate('comments.author', 'username')
     // send the note as json upon success
     .then((note) => {
       res.json({ note: note });

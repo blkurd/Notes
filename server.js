@@ -12,7 +12,8 @@ require("dotenv").config(); // Load my ENV file's variables
 const path = require("path"); // import path module
 const NoteRouter = require("./controllers/noteControllers");
 const UserRouter = require("./controllers/userControllers");
-const middleware = require('./utils/middleware')
+const CommentRouter = require("./controllers/commentControllers");
+const middleware = require("./utils/middleware");
 /////////////////////////////////////
 //// Import out models         ////
 /////////////////////////////////////
@@ -49,9 +50,9 @@ const app = express();
 /////////////////////////////////////
 //// Middleware                  ////
 /////////////////////////////////////
-// Moved to middleware.js in Utils and our middleware is now processed by a function in the utils directory. 
+// Moved to middleware.js in Utils and our middleware is now processed by a function in the utils directory.
 // This middleware function takes one argument, app, and processes requests through our middleware
-middleware(app)
+middleware(app);
 // // middleware runs before all the routes.
 // // every request is processed through our middleware before mongoose can do anything with it
 // app.use(morgan("tiny")); // this is for request loggging, the 'tiny' argument declares what size of morgan log to use
@@ -75,8 +76,8 @@ app.get("/", (req, res) => {
 // the first arg is the base URL, second arg is the file to use.
 
 app.use("/notes", NoteRouter);
+app.use("/comments", CommentRouter);
 app.use("/users", UserRouter);
-
 
 // All moved to noteControllers
 // // we're going to build a seed route

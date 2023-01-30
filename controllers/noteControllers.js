@@ -16,22 +16,27 @@ const router = express.Router();
 // index route
 // Read-> finds and displays all notes
 router.get("/", (req, res) => {
+  const { username, loggedIn, userId } = req.session
   // find all the notes
   Note.find({})
     // there's a built in function that runs before the rest of the promise chain
    // this function is called populate, and it's able to retrieve info 
   //  from other documents in other collections
         .populate('owner', 'username')
-        // .populate('comments.author', '-password')
+        .populate('comments.author', '-password')
     // send json if successful
     .then((notes) => {
-      res.json({ notes: notes });
+      // res.json({ notes: notes });
+    // now that we have liquid installed we need to use render as a response for our controllers
+    res.render('notes/index', { notes, username, loggedIn, userId })
     })
     // catch errors if they occur
     // .catch((err) => console.log("The following error occurred: \n", err));
-    .catch((err) => {
-      console.log(err);
-      res.status(404).json(err);
+    // catch errors if they occur
+    .catch(err => {
+      console.log(err)
+      // res.status(404).json(err)
+      res.redirect(`/error?error=${err}`)
     });
 });
 

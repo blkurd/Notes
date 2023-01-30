@@ -66,8 +66,8 @@ const db = mongoose.connection
 db.on('open', () => {
     // array of starter resources(notes)
     const startNotes = [
-              { owner: "" , title: "", text: "", color: "yellow" },
-              { owner: "" , title: "", text: "", color: "purple" },
+              { owner: "Anybody" , title: "sometitle", text: "sometext", color: "yellow" },
+              { owner: "somebody" , title: "sometitle", text: "sometext", color: "purple" },
             ];
     // then we delete every note in the database(all instances of this resource)
     // this will delete any notes that are not owned by a user

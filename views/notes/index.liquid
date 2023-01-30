@@ -1,0 +1,13 @@
+{%  layout 'layout.liquid' %}
+{% block content %}
+
+    {% if notes.length > 0 %}
+            <h2>All Notes</h2>
+            <ul> {% for note in notes %}</ul>
+                <li>{{ note.title }}</li>
+            {% endfor %}
+    {% else %}
+            <h2>No notes yet... Go create some!</h2>
+        </div>
+    {% endif %}
+{% endblock %}

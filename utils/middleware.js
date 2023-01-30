@@ -6,6 +6,7 @@ const morgan = require("morgan"); // import the morgan request logger
 const session = require ('express-session') // import the express-session package
 const MongoStore = require ('connect-mongo') // import the connect-mongo package(for sessions)
 require('dotenv').config()
+const methodOverride = require('method-override')
 ///////////////////////////////////
 //// Middleware Function         ////
 /////////////////////////////////////
@@ -16,11 +17,16 @@ require('dotenv').config()
 const middleware = (app) => {
   // middleware runs before all the routes.
   // every request is processed through our middleware before mongoose can do anything with it
+  // method-override is middleware that allows us to utilize forms to their full potential.
+  // by default, forms can ONLY and I mean ONLY send a GET or a POST request.
+  // method-override allows us to send PUT, PATCH, DELETE, and other requests from a form, by defining it with '_method'
+  app.use(methodOverride('_method'))
   app.use(morgan("tiny")); // this is for request loggging, the 'tiny' argument declares what
   //   size of morgan log to use
   // example : GET / 304 - - 7.108 ms
   app.use(express.urlencoded({ extended: true })); //this parses urlEncoded request bodies(useful
   //   for POST and PUT requests)
+  // using express.static('public') allows us to serve a single CSS stylesheet across our application where we want to.
   app.use(express.static("public")); // this serves static files from the 'public' folder
   app.use(express.json()); // parses incoming request payloads with JSON
   // So when we start sending data to our server to create items in our database.

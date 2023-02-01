@@ -1,13 +1,25 @@
-{%  layout 'layout.liquid' %}
+{% layout 'layout.liquid' %}
 {% block content %}
-
     {% if notes.length > 0 %}
+        <div class="container-md">
             <h2>All Notes</h2>
-            <ul> {% for note in notes %}</ul>
-                <li>{{ note.title }}</li>
-            {% endfor %}
+            <div class="row">
+                {% for note in notes %}
+                    <div class="card me-3 mb-3" style="width: 18rem;">
+                        <h5 class="card-header">{{note.title}}</h5>
+                        <div class="card-body">
+                            <h5 class="card-title"></h5>
+
+                            <a href="/notes/{{note.id}}" class="btn btn-info">View Note Details</a>
+
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
     {% else %}
-            <h2>No notes available!</h2>
+        <div class="container-md">
+            <h2>No notes yet... Go create some!</h2>
         </div>
     {% endif %}
 {% endblock %}

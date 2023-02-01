@@ -1,0 +1,23 @@
+{% layout 'layout.liquid' %}
+{% block content %}
+    <div class="container-sm">
+        <form action="/notes" method="POST">
+            <fieldset>
+                <legend>Create New Note</legend>
+                <label class="form-label">Title:</label>
+                <input 
+                    type="text" class="form-control" 
+                    name="name" placeholder="Note Title"
+                    required
+                >
+                <input 
+                type="text" class="form-control" 
+                name="name" placeholder="Text"
+                required
+            >
+        
+            </fieldset>
+            <input type="submit" class="btn btn-success" value="Create New Note">
+        </form>
+    </div>
+{% endblock %}

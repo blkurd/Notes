@@ -40,6 +40,12 @@ router.get("/", (req, res) => {
     });
 });
 
+// GET for the new page
+// shows a form where a user can create a new note
+router.get('/new', (req, res) => {
+  res.render('notes/new', { ...req.session })
+})
+
 // CREATE route
 // Create -> receives a request body, and creates a new document in the database
 router.post("/", (req, res) => {
@@ -197,6 +203,7 @@ router.get("/:id", (req, res) => {
     // send the note as json upon success
     .then((note) => {
       res.json({ note: note });
+      res.render('notes/show.liquid.js', {note, ...req.session})
     })
     // catch any errors
     .catch((err) => {

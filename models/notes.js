@@ -7,13 +7,21 @@
 const mongoose = require("../utils/connection"); //import mongoose from utils
 // const { stringify } = require('querystring')
 // import our commentSchema, to use as a subdocument
-const commentSchema = require('./comment')
+const commentSchema = require("./comment");
 // we'll destructure the Schema and model functions from mongoose
 const { Schema, model } = mongoose;
 
 // notes Schema
 const notesSchema = new Schema(
   {
+    title: {
+      type: String,
+    },
+
+    body: {
+      type: String,
+    },
+
     owner: {
       // this is where we set up an objectId reference
       // by declaring that as the type
@@ -21,20 +29,9 @@ const notesSchema = new Schema(
       // this line tells us which model to look at
       ref: "User",
     },
-    
-    comments: [commentSchema],
-    
-    title: {
-      type: String,
-    },
-    text: {
-      type: String,
-    },
-    color: {
-      type: String,
-    },
-  },
 
+    comments: [commentSchema],
+  },
   { timestamps: true }
 );
 

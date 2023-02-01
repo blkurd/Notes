@@ -3,21 +3,20 @@
     <div class="container-sm">
         <form action="/notes" method="POST">
             <fieldset>
-                <legend>Create New Note</legend>
+                <legend id="create">Create A New Note</legend>
+
                 <label class="form-label">Title:</label>
                 <input 
                     type="text" class="form-control" 
-                    name="name" placeholder="Note Title"
-                    required
-                >
-                <input 
-                type="text" class="form-control" 
-                name="name" placeholder="Text"
-                required
-            >
-        
+                    name="Title" placeholder="Type">
+
+                <label id="textlable" class="form-label">Text:</label>
+
+                <input  type="text" class="form-control" 
+                    name="Text" placeholder="Type">
+
             </fieldset>
-            <input type="submit" class="btn btn-success" value="Create New Note">
+            <input id="createbutton" type="submit" class="btn btn-success" value="Create">
         </form>
     </div>
 {% endblock %}

@@ -12,13 +12,10 @@ const router = express.Router()
 //////////////////////////////
 //// Routes               ////
 //////////////////////////////
-// Subdocuments are not mongoose models. That means they don't have their own collection, and 
-// they don't come with the same model methods that we're used to(they have some their own built in.)
-// This also means, that a subdoc is never going to be viewed without it's parent document. We'll never 
-// see a comment without seeing the note it was commented on first.
+// Subdocuments are not mongoose models. That means they don't have their own collection, and they don't come with the same model methods that we're used to(they have some their own built in.)
+// This also means, that a subdoc is never going to be viewed without it's parent document. We'll never see a comment without seeing the fruit it was commented on first.
 
-// This also means, that when we make a subdocument, we must MUST refer to the parent so that mongoose knows 
-//  where in mongodb to store this subdocument
+// This also means, that when we make a subdocument, we must MUST refer to the parent so that mongoose knows where in mongodb to store this subdocument
 
 // POST -> `/comments/<someNoteId>`
 // only loggedin users can post comments
@@ -44,19 +41,22 @@ router.post('/:noteId', (req, res) => {
             })
             // respond with a 201 and the note itself
             .then(note => {
-                res.status(201).json({ note: note })
+                // res.status(201).json({ note: note })
+                res.redirect(`/notes/${note.id}`)
             })
             // catch and handle any errors
             .catch(err => {
                 console.log(err)
-                res.status(400).json(err)
+                // res.status(400).json(err)
+                res.redirect(`/error?error=${err}`)
             })
     } else {
-        res.sendStatus(401) //send a 401-unauthorized
+        // res.sendStatus(401) //send a 401-unauthorized
+        res.redirect(`/error?error=You%20Are%20not%20allowed%20to%20comment%20on%20this%20note`)
     }
 })
 
-// DELETE -> `/comments/delete/<someNoteId>/<someCommentId>`
+// DELETE -> `/comments/delete/<someFruitId>/<someCommentId>`
 // make sure only the author of the comment can delete the comment
 router.delete('/delete/:noteId/:commId', (req, res) => {
     // isolate the ids and save to variables so we don't have to keep typing req.params
@@ -76,19 +76,23 @@ router.delete('/delete/:noteId/:commId', (req, res) => {
                     // we can use another built in method - remove()
                     theComment.remove()
                     note.save()
-                    res.sendStatus(204) //send 204 no content
+                    // res.sendStatus(204) //send 204 no content
+                    res.redirect(`/notes/${note.id}`)
                 } else {
                     // otherwise send a 401 - unauthorized status
-                    res.sendStatus(401)
+                    // res.sendStatus(401)
+                    res.redirect(`/error?error=You%20Are%20not%20allowed%20to%20delete%20this%20comment`)
                 }
             } else {
                 // otherwise send a 401 - unauthorized status
-                res.sendStatus(401)
+                // res.sendStatus(401)
+                res.redirect(`/error?error=You%20Are%20not%20allowed%20to%20delete%20this%20comment`)
             }
         })
         .catch(err => {
             console.log(err)
-            res.status(400).json(err)
+            // res.status(400).json(err)
+            res.redirect(`/error?error=${err}`)
         })
 })
 

@@ -24,8 +24,7 @@ const commentSchema = new Schema({
     timestamps: true
 })
 
-// Take note that there is no model function happening anywhere in this file. 
-// That's because SUBDOCS ARE NOT MONGOOSE MODELS.
+// Take note that there is no model function happening anywhere in this file. That's because SUBDOCS ARE NOT MONGOOSE MODELS.
 
 ////////////////////////////////////
 //// Export our Schema          ////

@@ -5,3 +5,33 @@ body{
     background-repeat: no-repeat;
     background-size:2000px;
 } 
+
+#notehomepage{
+   margin-top: 370px;
+   font-size: 30px;
+   font-family: 'georgia';
+   font-weight: bold; 
+   margin-left: 50px;
+
+}
+
+p{
+    margin-top: 20px;
+    
+
+}
+
+#create{
+    margin-top: 100px;
+}
+
+#createbutton, #textlable{
+    margin-top: 30px;
+
+}
+
+#textpadding{
+    
+    padding-right: 10px;
+
+}

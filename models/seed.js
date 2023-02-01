@@ -2,6 +2,7 @@
 /////////////////////////////////////
 //// Import Dependencies         ////
 /////////////////////////////////////
+const { read } = require('fs');
 const mongoose = require('../utils/connection')
 const Note = require('./notes')
 
@@ -66,8 +67,8 @@ const db = mongoose.connection
 db.on('open', () => {
     // array of starter resources(notes)
     const startNotes = [
-              { owner: "Anybody" , title: "sometitle", text: "sometext", color: "yellow" },
-              { owner: "somebody" , title: "sometitle", text: "sometext", color: "purple" },
+              {title: "sometitle", text: "sometext", color: "yellow" , read:true },
+              {title: "sometitle", text: "sometext", color: "purple" , read:false },
             ];
     // then we delete every note in the database(all instances of this resource)
     // this will delete any notes that are not owned by a user

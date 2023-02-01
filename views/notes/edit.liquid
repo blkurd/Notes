@@ -5,19 +5,9 @@
             <fieldset>
                 <legend>Edit {{ note.title }}</legend>
                 <label class="form-label">Title:</label>
-                <input 
-                    type="text" class="form-control" 
-                    name="title" placeholder="Type here?"
-                    required value="{{ note.title }}"
-                >
-                <label class="form-label">Color:</label>
-                <input 
-                    type="color" class="form-control" 
-                    name="color" placeholder="What color is the note?"
-                    required value="{{ note.color }}"
-                >
+
             </fieldset>
-            <input type="submit" class="btn btn-success" value="Edit {{ note.name }}">
+            <input type="submit" class="btn btn-success" value="Edit {{ note.title }}">
             <a href="/notes/{{ note.id }}" class="btn btn-warning">Back</a>
         </form>
     </div>

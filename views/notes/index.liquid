@@ -2,24 +2,23 @@
 {% block content %}
     {% if notes.length > 0 %}
         <div class="container-md">
-            <h2>All Notes</h2>
+            <h2>Notes Available</h2>
             <div class="row">
                 {% for note in notes %}
                     <div class="card me-3 mb-3" style="width: 18rem;">
                         <h5 class="card-header">{{note.title}}</h5>
                         <div class="card-body">
-                            <h5 class="card-title"></h5>
-
-                            <a href="/notes/{{note.id}}" class="btn btn-info">View Note Details</a>
-
+                          
+                            <a href="/notes/{{note.id}}" class="btn btn-info">View {{note.title}}</a>
                         </div>
                     </div>
-                {% endfor %}
+                            {% endfor %}
             </div>
         </div>
+        
     {% else %}
         <div class="container-md">
-            <h2>No notes yet... Go create some!</h2>
+            <h2>No Notes Available</h2>
         </div>
     {% endif %}
 {% endblock %}

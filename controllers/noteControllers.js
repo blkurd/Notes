@@ -2,6 +2,7 @@
 //// Import Dependencies         ////
 /////////////////////////////////////
 const express = require("express");
+require('dotenv').config()
 const Note = require("../models/notes");
 
 /////////////////////////////////////
@@ -55,19 +56,25 @@ router.post("/", (req, res) => {
   // we want to add an owner field to our note
   // It is great that we saved the user's id on the session object
   // so it is easy for us to access that data.
-  req.body.owner = req.session.userId;
+  req.body.read = req.body.read === 'on' ? true : false
   const newNote = req.body;
   Note.create(newNote)
     // send a 201 status, along with the json response of the new note
-    .then((note) => {
-      res.status(201).json({ note: note.toObject() });
+    .then(note => {
+      // in the API server version of our code we sent json and a success msg
+      // res.status(201).json({ note: note.toObject() })
+      // we could redirect to the 'mine' page
+      // res.status(201).redirect('/notes/mine')
+      // we could also redirect to the new note's show page
+      res.redirect(`/notes/${note.id}`)
     })
     // send an error if one occurs
-    // .catch((err) => console.log(err));
-    .catch((err) => {
-      console.log(err);
-      res.status(404).json(err);
-    });
+    .catch(err => {
+      console.log(err)
+      // res.status(404).json(err)
+      res.redirect(`/error?error=${err}`)
+});
+
 });
 
 // GET route
@@ -81,7 +88,28 @@ router.get('/mine', (req, res) => {
       .populate('comments.author', '-password')
       .then(notes => {
           // if found, display the notes
+          res.render('notes/index', { notes, ...req.session })
+      })
+      .catch(err => {
+          // otherwise throw an error
+          console.log(err)
+          res.redirect(`/error?error=${err}`)
+      })
+})
+
+
+// GET route for getting json for specific user notes
+// Index -> This is a user specific index route
+// this will only show the logged in user's notes
+router.get('/json', (req, res) => {
+  // find notes by ownership, using the req.session info
+  Note.find({ owner: req.session.userId })
+      .populate('owner', 'username')
+      .populate('comments.author', '-password')
+      .then(notes => {
+          // if found, display the notes
           res.status(200).json({ notes: notes })
+          // res.render('notes/index', { notes, ...req.session })
       })
       .catch(err => {
           // otherwise throw an error
@@ -90,80 +118,53 @@ router.get('/mine', (req, res) => {
       })
 })
 
-
-
-
-
-// PUT route
-// Update -> updates a specific note
-// PUT replaces the entire document with a new document from the req.body
-// PATCH is able to update specific fields at specific times, but it requires a little more code to ensure that it works properly, so we'll use that later
-// router.put("/:id", (req, res) => {
-//   // save the id to a variable for easy use later
-//   const id = req.params.id;
-//   // save the request body to a variable for easy reference later
-//   const updatedNote = req.body;
-//   // we're going to use the mongoose method:
-//   // findByIdAndUpdate
-//   // eventually we'll change how this route works, but for now,
-//   // we'll do everything in one shot, with findByIdAndUpdate
-//   Note.findByIdAndUpdate(id, updatedNote, { new: true })
-//     .then((note) => {
-//       console.log("the newly updated note", note);
-//       // update success message will just be a 204 - no content
-//       res.sendStatus(204);
-//     })
-//     // .catch((err) => console.log(err));
-//     .catch((err) => {
-//       console.log(err);
-//       res.status(404).json(err);
-//     });
-// });
-
-// PUT route
-// Update -> updates a specific note(only if the note's owner is updating)
-router.put('/:id', (req, res) => {
-  const id = req.params.id
-  Note.findById(id)
+// GET request -> edit route
+// shows the form for updating a note
+router.get('/edit/:id', (req, res) => {
+  // because we're editing a specific note, we want to be able to access the note's initial values. so we can use that info on the page.
+  const noteId = req.params.id
+  Note.findById(noteId)
       .then(note => {
-          // if the owner of the note is the person who is logged in
-          if (note.owner == req.session.userId) {
-              // send success message
-              res.sendStatus(204)
-              // update and save the note
-              return note.updateOne(req.body)
-          } else {
-              // otherwise send a 401 unauthorized status
-              res.sendStatus(401)
-          }
+          res.render('notes/edit', { note, ...req.session })
       })
       .catch(err => {
-          console.log(err)
-          res.status(400).json(err)
+          res.redirect(`/error?error=${err}`)
       })
 })
 
 
 
-// DELETE route
-// Delete -> delete a specific note
 
-// router.delete("/:id", (req, res) => {
-//   // get the id from the req
-//   const id = req.params.id;
-//   // find and delete the note
-//   Note.findByIdAndRemove(id)
-//     // send a 204 if successful
-//     .then(() => {
-//       res.sendStatus(204);
-//     })
-//     // send an error if not
-//     // .catch((err) => console.log(err));
-//     .catch((err) => {
-//       console.log(err);
-//       res.status(404).json(err);
-//     });
-// });
+// PUT route
+// Update -> updates a specific note(only if the note's owner is updating)
+router.put('/:id', (req, res) => {
+  const id = req.params.id
+  req.body.read = req.body.read === 'on' ? true : false
+  Note.findById(id)
+      .then(note => {
+          // if the owner of the note is the person who is logged in
+          if (note.owner == req.session.userId) {
+              // send success message
+              // res.sendStatus(204)
+              // update and save the note
+              return note.updateOne(req.body)
+          } else {
+              // otherwise send a 401 unauthorized status
+                // res.sendStatus(401)
+                res.redirect(`/error?error=You%20Are%20not%20allowed%20to%20edit%20this%20note`)
+          }
+      })
+      .then(() => {
+        // console.log('the note?', note)
+        res.redirect(`/notes/mine`)
+    })
+    .catch(err => {
+        console.log(err)
+        // res.status(400).json(err)
+        res.redirect(`/error?error=${err}`)
+    })
+})
+
 
 
 // DELETE route
@@ -175,18 +176,23 @@ router.delete('/:id', (req, res) => {
           // if the owner of the note is the person who is logged in
           if (note.owner == req.session.userId) {
               // send success message
-              res.sendStatus(204)
+              // res.sendStatus(204)
               // delete the note
               return note.deleteOne()
           } else {
               // otherwise send a 401 unauthorized status
-              res.sendStatus(401)
+                // res.sendStatus(401)
+                res.redirect(`/error?error=You%20Are%20not%20allowed%20to%20delete%20this%20note`)
           }
       })
-      .catch(err => {
-          console.log(err)
-          res.status(400).json(err)
-      })
+      .then(() => {
+        res.redirect('/notes/mine')
+    })
+    .catch(err => {
+        console.log(err)
+        // res.status(400).json(err)
+        res.redirect(`/error?error=${err}`)
+    })
 })
 
 
@@ -194,23 +200,24 @@ router.delete('/:id', (req, res) => {
 
 // SHOW route
 // Read -> finds and displays a single resource
-router.get("/:id", (req, res) => {
+router.get('/:id', async (req, res) => {
   // get the id -> save to a variable
-  const id = req.params.id;
+  const id = req.params.id
   // use a mongoose method to find using that id
   Note.findById(id)
-  .populate('comments.author', 'username')
-    // send the note as json upon success
-    .then((note) => {
-      res.json({ note: note });
-      res.render('notes/show.liquid.js', {note, ...req.session})
-    })
-    // catch any errors
-    .catch((err) => {
-      console.log(err);
-      res.status(404).json(err);
-    });
-});
+      .populate('comments.author', 'username')
+      // send the note as json upon success
+      .then(async note => {
+          // res.json({ note: note })
+          res.render('notes/show.liquid', { note, ...req.session })
+      })
+      // catch any errors
+      .catch(err => {
+          console.log('the error', err)
+          // res.status(404).json(err)
+          res.redirect(`/error?error=${err}`)
+      })
+})
 
 //////////////////////////////
 //// Export Router        ////

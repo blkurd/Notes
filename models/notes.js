@@ -18,7 +18,11 @@ const notesSchema = new Schema(
       type: String,
     },
 
-    body: {
+    text: {
+      type: String,
+    },
+
+    author: {
       type: String,
     },
 

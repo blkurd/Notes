@@ -3,6 +3,52 @@
     <div class="container-sm">
         <form action="/notes/{{note.id}}?_method=PUT" method="POST">
             <fieldset>
+
+                <legend>Edit {{ note.title }}</legend>
+
+                <label class="form-label">Title:</label>
+                <input
+                    type="text" class="form-control" 
+                    name="title" placeholder="Note Title"
+                    required value="{{ note.title }}"
+
+
+
+                >
+                <label class="form-label">Text:</label>
+                <input 
+                    type="text" class="form-control" 
+                    name="text" placeholder="Write A Note"
+                    required value="{{ note.text }}"
+                >
+               
+            </fieldset>
+
+            <input type="submit" class="btn btn-success" value="Edit {{ title }} {{ text }} ">
+            <a href="/notes/{{ note.id }}" class="btn btn-warning">Back</a>
+        </form>
+    </div>
+{% endblock %}
+    
+
+
+
+
+
+
+
+
+
+
+
+  {%- comment -%}
+
+
+     {% layout 'layout.liquid' %}
+{% block content %}
+    <div class="container-sm">
+        <form action="/notes/{{note.id}}?_method=PUT" method="POST">
+            <fieldset>
                 <legend>Edit {{ note.title }}</legend>
                 <label class="form-label">Title:</label>
 
@@ -12,3 +58,6 @@
         </form>
     </div>
 {% endblock %}
+
+        
+        {%- endcomment -%}

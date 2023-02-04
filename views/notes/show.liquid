@@ -1,6 +1,85 @@
 
+{% layout 'layout.liquid' %}
+{% block content %}
+<div class="container-md">
+    <div class="row justify-content-between">
+        <article class="col-5">
+            <h2>{{note.title}}</h2>
+         
+            <h4>{{note.text}}</h4>
+          
+            {% if note.owner == userId %}
+                <hr>
+                <div class="btn-group">
+                
+                
+                  
+                    <a href="/notes/edit/{{note.id}}" class="btn btn-outline-primary">Edit {{note.title}}</a>
+                    <form action="/notes/{{note.id}}?_method=DELETE" method="POST">
+                        <input type="submit" class="btn btn-outline-danger" value="Delete {{note.title}}">
+                    </form>
+                </div>
+            {% endif %}
+        </article>
+        <hr>
 
 
+        <h4>Comments</h4>
+        <hr>
+        {% if loggedIn %}
+            <div class="col-md-6">
+                <form action="/comments/{{ note.id }}" method="POST">
+                    <fieldset>
+                        <label class="form-label">Comment Here: </label>
+                        <input type="text" name="note" class="form-control mb-1">
+                    </fieldset>
+                    <input type="submit" class="btn btn-success" value="Add comment">
+                </form>
+            </div>
+        {% else %}
+            <div class="col-md-6">
+                <small>Please log in to be able to comment!</small>
+            </div>
+        {% endif %}
+
+        <hr>
+        {% if note.comments.length > 0 %}
+            <div class="container-sm justify-content-center">
+                {% for comm in note.comments %}
+                    {% render '../comment.liquid', comm: comm, userId: userId, note: note %}
+                {% endfor %}
+            </div>
+        {% else %}
+            <small>No comments yet!</small>
+        {% endif %}
+    </div>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ {%- comment -%}
 {% layout 'layout.liquid' %}
 {% block content %}
 
@@ -57,3 +136,4 @@
         {% endif %}
     </div>
 {% endblock %}
+ {%- endcomment -%}

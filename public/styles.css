@@ -17,8 +17,6 @@ body{
 
 p{
     margin-top: 20px;
-    
-
 }
 
 #create{
@@ -35,3 +33,7 @@ p{
     padding-right: 10px;
 
 }
+
+textarea {
+    resize: none;
+  }

@@ -38,26 +38,3 @@
 
 
 
-
-
-
-  {%- comment -%}
-
-
-     {% layout 'layout.liquid' %}
-{% block content %}
-    <div class="container-sm">
-        <form action="/notes/{{note.id}}?_method=PUT" method="POST">
-            <fieldset>
-                <legend>Edit {{ note.title }}</legend>
-                <label class="form-label">Title:</label>
-
-            </fieldset>
-            <input type="submit" class="btn btn-success" value="Edit {{ note.title }}">
-            <a href="/notes/{{ note.id }}" class="btn btn-warning">Back</a>
-        </form>
-    </div>
-{% endblock %}
-
-        
-        {%- endcomment -%}

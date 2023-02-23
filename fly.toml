@@ -1,17 +1,17 @@
-# fly.toml file generated for withered-tree-309 on 2023-02-23T07:31:03-05:00
+# fly.toml file generated for takingnotes-app2 on 2023-02-23T17:26:57-05:00
 
-app = "withered-tree-309"
+app = "takingnotes-app2"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
 
 [build]
-builder = "heroku/buildpacks:20"
+  builder = "heroku/buildpacks:20"
 
 [env]
+  DATABASE_URL = "mongodb+srv://blkurd:1231231234Qq@project2.hzzihi3.mongodb.net/project-2-notes?retryWrites=true&w=majority"
   PORT = "8080"
-  SECRET= "notesApp"
-  DATABASE_URL= mongodb+srv://blkurd:<1231231234Qq>@project2.hzzihi3.mongodb.net/project-2-notes?retryWrites=true&w=majority
+  SECRET = "notesApp"
 
 [experimental]
   auto_rollback = true

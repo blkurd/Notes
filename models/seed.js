@@ -15,6 +15,10 @@ db.on("open", () => {
   // array of starter resources(notes)
   const startNotes = [
     { title: "sometitle", text: "sometext", author: "someone" },
+    { title: "sometitle", text: "sometext", author: "someone" },
+    { title: "sometitle", text: "sometext", author: "someone" },
+    { title: "sometitle", text: "sometext", author: "someone" },
+    { title: "sometitle", text: "sometext", author: "someone" }
   ];
   // then we delete every note in the database(all instances of this resource)
   // this will delete any notes that are not owned by a user
